@@ -1,10 +1,17 @@
 .word {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-style: italic;
-    color: #6C63FF;
 }
 
 .partOfSpeech {
     font-size: 20px;
-    color: #2F2E41;
+    color: #6C63FF;
+}
+
+.SearchResults {
+    background-color: #2F2E41;
+    margin: 10px 30px;
+    border-radius: 10px;
+    color: white;
+    padding: 15px;
 }
