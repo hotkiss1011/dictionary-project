@@ -1,3 +1,7 @@
 .Dictionary {
-    background-color: aqua;
+    text-align: center;
+}
+
+.Dictionary input {
+    margin: 5px;
 }

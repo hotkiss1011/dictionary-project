@@ -1,0 +1,10 @@
+.word {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    color: #6C63FF;
+}
+
+.partOfSpeech {
+    font-size: 20px;
+    color: #2F2E41;
+}
