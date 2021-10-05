@@ -1,16 +1,21 @@
 import React from "react";
 import "./SearchResults.css"
+import Phonetics from "./Phonetics";
+import Meaning from "./Meaning";
 
 export default function SearchResults(props) {
-    if (props.data.length) {
+  console.log(props.data);
+    if (props.data) {
         return (
           <div className="SearchResults">
-            <h1 className="word">{props.data[0].hwi.hw}</h1>
-            <h2 className="partOfSpeech">{props.data[0].fl}</h2>
-            {props.data[0].shortdef.map(function (def, index) {
+            <h1 className="word">{props.data.word}</h1>
+
+            <Phonetics audio={props.data.phonetics} />
+
+            {props.data.meanings.map(function (meaning, index) {
               return (
                 <div key={index}>
-                  {index + 1}. {def}
+                  <Meaning meaning={meaning} />
                 </div>
               );
             })}

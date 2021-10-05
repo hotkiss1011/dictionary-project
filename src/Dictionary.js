@@ -2,22 +2,33 @@ import axios from "axios";
 import React, { useState } from "react";
 import "./Dictionary.css"
 import SearchResults from "./SearchResults";
+import Photos from "./Photos";
 
 export default function Dictionary() {
     let [keyword, setKeyword] = useState("");
-    let [definitions, setDefinitions] = useState({});
+    let [definitions, setDefinitions] = useState(null);
+    let [photos, setPhotos] = useState(null);
 
     function handleResponse(response) {
-        setDefinitions(response.data);
+        setDefinitions(response.data[0]);
+    }
+
+    function handlePexelsResponse(response) {
+      setPhotos(response.data.photos);
     }
 
     function search(event) {
         event.preventDefault();
         alert(`Searching for ${keyword} definition`);
 
-        let apiKey = "abaf2506-b8a7-46fe-9273-0746a889a5ed";
-        let apiUrl = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${keyword}?key=${apiKey}`;
+        let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`;
         axios.get(apiUrl).then(handleResponse);
+
+        let pexelsApiKey =
+          "563492ad6f91700001000001144fbf14b05a48f68256fd4aae7c5225";
+        let pexelsApiUrl = `https://api.pexels.com/v1/search?query=${keyword}&per_page=9`;
+        let headers = { Authorization: `Bearer ${pexelsApiKey}` };
+        axios.get(pexelsApiUrl, { headers: headers }).then(handlePexelsResponse);
     }
 
     function handleKeywordChange(event) {
@@ -35,6 +46,7 @@ export default function Dictionary() {
           <input type="submit" onSubmit={search} />
         </form>
         <SearchResults data={definitions} />
+        <Photos photo={photos} />
       </div>
     );
 }
